@@ -1,0 +1,42 @@
+<!-- BEGIN SIDEBAR -->
+<aside>
+	<div id="sidebar" class="nav-collapse">
+		<ul class="sidebar-menu" id="nav-accordion">
+			<li>
+				<a href="{:url('admin/index/index')}" {if condition="$current_menu['id'] == 1"}class="active"{/if}>
+					<i class="fa fa-dashboard"></i>
+					<span>控制台</span>
+				</a>
+			</li>
+			{volist name="auth_rules" id="vo"}
+            <li class="sub-menu">
+                <a href="javascript:;" {if condition="($vo.id==$current_menu['id']) OR ($vo.id==$current_menu['pid']) OR ($vo.id==$current_menu['father']['pid'])"}class="active"{/if}>
+                    <i class="{$vo.icon}"></i>
+                    <span>{$vo.title}</span>
+                    <span class="label
+                    {switch name="$vo['children']|count"}
+                        {case value="1"}{$css_color[1]}{/case}
+                        {case value="2"}{$css_color[2]}{/case}
+                        {case value="3"}{$css_color[3]}{/case}
+                        {case value="4"}{$css_color[4]}{/case}
+                        {case value="5"}{$css_color[5]}{/case}
+                        {case value="6"}{$css_color[6]}{/case}
+                        {case value="7"}{$css_color[7]}{/case}
+                        {default /} label-inverse
+                      {/switch} span-sidebar">
+                    {$vo['children']|count}
+                    </span>
+                </a>
+                <ul class="sub">
+                    {volist name="$vo['children']" id="child"}
+                    <li {if condition="($child['id']==$current_menu['id']) || ($child['id']==$current_menu['pid'])"}class="active"{/if}>
+                        <a href="{:url('admin/' . $child['rule_url'])}"> {$child['title']} </a>
+                    </li>
+                    {/volist}
+                </ul>
+            </li>
+			{/volist}
+		</ul>
+	</div>
+</aside>
+<!-- END SIDEBAR -->

@@ -1,0 +1,7 @@
+/.idea
+/.vscode
+*.log
+*.lock
+.env
+.DS_Store
+runtime

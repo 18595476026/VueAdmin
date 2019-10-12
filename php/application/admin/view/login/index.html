@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!-- BEGIN META -->
+		{include file="public/meta"}
+		<!-- END META -->
+
+		<!-- BEGIN STYLESHEET-->
+		{include file="public/css"}
+		<!-- END STYLESHEET-->
+		<title>
+			{$yun_config.title} - {$yun_config.web_name} Power by {$yun_config.author}
+		</title>
+
+	</head>
+
+	<body class="login-screen">
+		<!-- BEGIN SECTION -->
+		<div class="container">
+			<form class="form-signin" action="{:url('admin/login/login')}" method="post">
+				<h2 class="form-signin-heading">{$yun_config.title}</h2>
+				<!-- LOGIN WRAPPER  -->
+				<div class="login-wrap">
+					<input type="text" name="username" id="username" class="form-control" placeholder="User ID" autofocus>
+					<input type="password" name="password" id="password" class="form-control" placeholder="Password">
+					<label class="checkbox">
+            			<input type="checkbox" name="remember">Remember me
+					</label>
+					<button class="btn btn-lg btn-login btn-block" type="submit" onclick="return verify()">
+						Sign in
+					</button>
+					<p>
+						Thank you for using YunAdmin System
+					</p>
+				</div>
+				<!-- END LOGIN WRAPPER -->
+			</form>
+		</div>
+		<!-- END SECTION -->
+		<!-- BEGIN JS -->
+		<script src="__STATIC__/js/jquery.js"></script>
+		<!-- BASIC JQUERY LIB. JS -->
+		<script src="__STATIC__/js/bootstrap.min.js"></script>
+		<!-- BOOTSTRAP JS -->
+		<script src="__STATIC__/js/layer/layer.js"></script>
+		<!-- LATER JS -->
+		<script src="__STATIC__/js/yunadmin/login.js"></script>
+		<!-- YunAdmin LOGIN JS -->
+		<!-- END JS -->
+	</body>
+
+</html>

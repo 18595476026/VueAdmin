@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- BEGIN META -->
+    {include file="public/meta"}
+    <!-- END META -->
+
+    <!-- BEGIN STYLESHEET-->
+    {include file="public/css"}
+    <!-- END STYLESHEET-->
+
+    <title>
+        {$current_menu['title']} - {$yun_config.title}
+    </title>
+</head>
+
+<body>
+<!-- BEGIN SECTION -->
+<section id="container">
+    <!-- BEGIN HEADER -->
+    {include file="public/header"}
+    <!-- END HEADER -->
+    <!-- BEGIN SIDEBAR -->
+    {include file="public/sidebar"}
+    <!-- END SIDEBAR -->
+    <!-- BEGIN MAIN CONTENT -->
+    <section id="main-content">
+        <!-- BEGIN WRAPPER  -->
+        <section class="wrapper">
+            <!-- TOP MENU ROW  -->
+            {include file="public/top_menu"}
+            <!-- TOP MENU ROW  -->
+
+            <!-- BEGIN ROW  -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <span class="label label-primary">{$current_menu['title']}</span>
+                            <span class="tools pull-right"></span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form">
+                                <form class="cmxform form-horizontal tasi-form" id="personalForm" method="post" action="{:url('Admin/Personal/index')}" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="username" class="control-label col-sm-2">用户名</label>
+                                        <div class="col-sm-3">
+                                            <input class="form-control bg-white" id="username" name="username" type="text" disabled="disabled" value="{$yun_administrator.username}">
+                                        </div>
+                                        <label class="control-label col-sm-3 color-red pull-left">
+                                            <i class="fa fa-bolt"></i>&nbsp;无法修改
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group last">
+                                        <label for="head_pic" class="control-label col-sm-2">头像</label>
+                                        <div class="col-sm-3">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="fileupload-new thumbnail">
+                                                    <img src="{if condition="$yun_administrator['head_pic']['head_pic_140_thumb'] neq ''"}{$yun_administrator['head_pic']['head_pic_140_thumb']}
+                                                    {else /}__STATIC__/img/no_image.png
+                                                    {/if}">
+                                                </div>
+                                                <div class="fileupload-preview fileupload-exists thumbnail"></div>
+                                                <div>
+                                                    <span class="btn btn-white btn-file">
+                                                        <span class="fileupload-new">
+                                                            <i class="fa fa-paper-clip"></i> 选择头像
+                                                        </span>
+                                                        <span class="fileupload-exists">
+                                                            <i class="fa fa-undo"></i> 重置
+                                                        </span>
+                                                        <input type="file" class="default" name="head_pic">
+                                                    </span>
+                                                    <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">
+                                                        <i class="fa fa-trash"></i> 删除
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sex" class="control-label col-sm-2">性别</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control m-bot15" name="sex" id="sex">
+                                                <option value="0" {if condition="$yun_administrator.sex eq 0"}selected="selected" {/if}>保密</option>
+                                                <option value="1" {if condition="$yun_administrator.sex eq 1"}selected="selected" {/if}>男</option>
+                                                <option value="2" {if condition="$yun_administrator.sex eq 2"}selected="selected" {/if}>女</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="birthday" class="control-label col-sm-2">生日</label>
+                                        <div class="col-sm-2">
+                                            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="{:date('Y-m-d')}" class="input-append date dpYears w-90p">
+                                                <input name="birthday" id="birthday" type="text" readonly="" value="{$yun_administrator.birthday}" size="16" class="form-control">
+                                                <span class="input-group-btn add-on">
+                                                    <button class="btn btn-info" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mobile" class="control-label col-sm-2">电话</label>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" id="mobile" name="mobile" type="text" value="{$yun_administrator.phone}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="qq" class="control-label col-sm-2">QQ</label>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" id="qq" name="qq" type="text" value="{$yun_administrator.qq}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="control-label col-sm-2">E-mail</label>
+                                        <div class="col-sm-3">
+                                            <input class="form-control " id="email" name="email" type="email" value="{$yun_administrator.email}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                            <button class="btn btn-default" type="reset">重置</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- END ROW  -->
+        </section>
+        <!-- END WRAPPER  -->
+    </section>
+    <!-- END MAIN CONTENT -->
+    <!-- BEGIN FOOTER -->
+    {include file="public/footer"}
+    <!-- END FOOTER -->
+</section>
+<!-- END SECTION -->
+<!-- BEGIN JS -->
+{include file="public/js"}
+<script src="__STATIC__/js/yunadmin/personal.js"></script>
+<!-- YunAdmin PERSONAL JS -->
+<!-- END JS -->
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- BEGIN META -->
+    {include file="public/meta"}
+    <!-- END META -->
+
+    <!-- BEGIN STYLESHEET-->
+    {include file="public/css"}
+    <!-- END STYLESHEET-->
+
+    <title>
+        {$current_menu['title']} - {$yun_config.title}
+    </title>
+</head>
+
+<body>
+<!-- BEGIN SECTION -->
+<section id="container">
+    <!-- BEGIN HEADER -->
+    {include file="public/header"}
+    <!-- END HEADER -->
+    <!-- BEGIN SIDEBAR -->
+    {include file="public/sidebar"}
+    <!-- END SIDEBAR -->
+    <!-- BEGIN MAIN CONTENT -->
+    <section id="main-content">
+        <!-- BEGIN WRAPPER  -->
+        <section class="wrapper z-index-1">
+            <!-- TOP MENU ROW  -->
+            {include file="public/top_menu"}
+            <!-- TOP MENU ROW  -->
+
+            <!-- BEGIN ROW  -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <span class="label label-primary">{$current_menu['title']}</span>
+                            <span class="tools pull-right"></span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="form">
+                                <form class="cmxform form-horizontal tasi-form" id="menuForm" method="post" action="{:url('admin/Menu/save')}">
+                                    <div class="form-group">
+                                        <label for="title" class="control-label col-lg-2">菜单名称</label>
+                                        <div class="col-lg-3">
+                                            <input class="form-control bg-white" id="title" name="title" type="text" value="{$menu.title}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pid" class="control-label col-lg-2">上级菜单</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control m-bot15" name="pid" id="pid">
+                                                <option value="0" {if condition="$menu.pid eq 0"}selected="selected"{/if}>顶级菜单</option>
+                                                {volist name="menu_list" id="item"}
+                                                <option value="{$item.id}" {if condition="$menu.pid eq $item.id"}selected="selected"{/if}>{$item.title}</option>
+                                                {if condition="!empty($item['children'])"}
+                                                {volist name="$item['children']" id="item_son"}
+                                                <option value="{$item_son.id}" {if condition="$menu.pid eq $item_son.id"}selected="selected"{/if}>&nbsp;&nbsp;&nbsp;┗━{$item_son.title}</option>
+                                                {/volist}
+                                                {/if}
+                                                {/volist}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="rule" class="control-label col-lg-2">Controller/Action</label>
+                                        <div class="col-lg-3">
+                                            <input class="form-control" id="rule" name="rule" type="text" value="{$menu.rule_url}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="icon" class="control-label col-lg-2">菜单icon图标</label>
+                                        <div class="col-lg-3">
+                                            <input class="form-control" id="icon" name="icon" type="text" value="{$menu.icon}">
+                                        </div>
+                                        <label class="control-label col-lg-2 color-red"><i class="fa fa-bolt"></i>&nbsp;仅对顶级菜单有作用</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="is_link" class="control-label col-lg-2">显示状态</label>
+                                        <div class="m-bot15">
+                                            <div class="col-lg-3">
+                                                <input class="form-control" id="is_link" name="is_link" type="checkbox" {if condition="$menu.is_link eq 1"}checked="checked"{/if} data-toggle="switch">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sort" class="control-label col-lg-2">排序</label>
+                                        <div class="col-lg-3">
+                                            <input class="form-control" id="sort" name="sort" type="number" value="{$menu.sort}">
+                                        </div>
+                                        <label class="control-label col-lg-2 color-red"><i class="fa fa-bolt"></i>&nbsp;从小到大</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tips" class="control-label col-lg-2">页面提示</label>
+                                        <div class="col-lg-6">
+                                            <textarea class="wysihtml5 form-control" id="tips" name="tips" rows="8">{$menu.tips}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="hidden" name="id" id="id" value="{$menu.id}">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                            <button class="btn btn-default" type="reset">重置</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- END ROW  -->
+        </section>
+        <!-- END WRAPPER  -->
+    </section>
+    <!-- END MAIN CONTENT -->
+    <!-- BEGIN FOOTER -->
+    {include file="public/footer"}
+    <!-- END FOOTER -->
+</section>
+<!-- END SECTION -->
+<!-- BEGIN JS -->
+{include file="public/js"}
+<script src="__STATIC__/js/yunadmin/setting.js"></script>
+<!-- YunAdmin setting JS -->
+<!-- END JS -->
+</body>
+
+</html>
