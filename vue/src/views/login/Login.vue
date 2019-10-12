@@ -66,7 +66,7 @@
                                 this.Inform(response.data.data.urlRows);
 
                                 this.openNotificationWithIcon('success','欢迎',"欢迎回来！！！");
-                                this.$router.replace({path: '/Article/index'});
+                                this.$router.replace({path: '/index'});
                             }else {
                                 this.spinning = false;
                                 this.form.resetFields()

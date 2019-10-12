@@ -17,10 +17,10 @@
                 :openKeys="openKeys"
                 @openChange="onOpenChange"
         >
-<!--            <a-menu-item key="1">-->
-<!--                <a-icon type="desktop" />-->
-<!--                <span><router-link tag="span" to="/index">控制台</router-link></span>-->
-<!--            </a-menu-item>-->
+            <a-menu-item key="1">
+                <a-icon type="desktop" />
+                <span><router-link tag="span" to="/index">控制台</router-link></span>
+            </a-menu-item>
             <template v-for="value in menu_list">
                 <a-menu-item v-if="value['children'].length === 0" :key="value['id']">
                     <a-icon type="desktop" />

@@ -232,7 +232,7 @@ router.beforeEach((to, from, next) => {
     }else {
         if (user_access_token){
             next({
-                path: '/Article/index'
+                path: '/index'
             });
         }else{
             if (to.fullPath == '/'){
