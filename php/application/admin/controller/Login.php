@@ -89,7 +89,7 @@ class Login extends YunAdmin
                     Cookie::set('authority', $authority, 3600);
                 }
                 $this->yun_administrator = $admin_user;
-                //登录中心服务器
+                //单点登录-登录中心服务器
                 $login_result = sso_user_login($username,$password);
                 if ($login_result['rcode'] !== 'y010401'){
                     $data = [
@@ -99,7 +99,7 @@ class Login extends YunAdmin
                     ];
                     takeOperateLog($admin_user['admin_uid'], $admin_user['username'], '登陆中心服务器失败(登陆操作)');
                 }else{
-                    //同步登录
+                    //单点登录-同步登录
                     $syn = sso_sync_login($login_result);
 
                     // 对用户信息进行base64_decode解码
@@ -149,22 +149,23 @@ class Login extends YunAdmin
         $arr_userSso['user_name'] = input('user_name',"");
         $arr_userSso['user_access_token'] = input('user_access_token',"");
 
-        //同步登出
+        //单点登录-同步登出
         $syn = sso_sync_logout($arr_userSso);
-        if (!empty($syn['urlRows'])){
+
+        if ($syn['rcode'] == 'y100402'){
             # 将cookie标识删除
             Cookie::delete('authority');
             takeOperateLog($this->yun_administrator['admin_uid'], $this->yun_administrator['username'], '注销登陆(登陆操作)');
             $data = [
                 'code' => 1,
                 'data' => $syn['urlRows'],
-                'msg' => "恭喜您，退出退出成功！"
+                'msg' => "恭喜您，退出成功！"
             ];
         }else{
             $data = [
                 'code' => 0,
                 'data' => "",
-                'msg' => "抱歉，退出退出失败！"
+                'msg' => $syn['msg']
             ];
         }
         return json_encode($data);

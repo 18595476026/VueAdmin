@@ -4,6 +4,7 @@
 
 <script>
     import {Logout} from "../../axios/api";
+    import { Inform } from "../../assets/common";
 
     export default {
         name: "LogOut",
@@ -25,25 +26,18 @@
                     this.$cookie.delete('user_name');
                     this.$cookie.delete('user_access_token');
 
-                    //同步通知接口
-                    this.Inform(res.data.data);
+                    //单点登录-同步通知接口
+                    Inform(res.data.data);
 
                     this.$message.success(res.data.msg, 2);
                     this.$router.replace({path: '/login'});
                 } else {
                     this.$message.error(res.data.msg, 2);
+                    this.$router.replace({path: '/index'});
                 }
                 this.spinning = false;
             });
         },
-        methods:{
-            Inform(urlRows){
-                var url_num = urlRows.length;
-                for(let i = 0; i< url_num; i++) {
-                    this.$http.jsonp(urlRows[i],{jsonp:'callback'}).then(function (res) {});
-                }
-            },
-        }
     }
 </script>
 
