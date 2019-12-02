@@ -19,3 +19,24 @@ VueAdmin是基于MIT协议的开源框架，它完全免费。你可以免费下
 * UI框架：Ant-Design-Vue 1.3.17
 
 > VueAdmin的运行环境要求PHP5.6以上。
+
+> 详细开发文档参考 [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp5_1/353946) | [Ant-Design-Vue官方文档](https://www.antdv.com/components/carousel-cn/)
+
+## 系统功能
+
+* 登录、退出登录、修改密码
+* ~~注册账户、记住密码~~
+* 菜单管理
+* 文章管理
+* 权限管理
+* 个人中心
+
+### Demo
+
+演示地址：未搭建
+
+### 登录项目：
+
+* 用户名：admin
+
+* 密码：123456
