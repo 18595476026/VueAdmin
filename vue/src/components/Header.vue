@@ -25,8 +25,7 @@
                             </a-menu-item>
                         </a-menu>
                     </a-dropdown>
-<!--                    <a-avatar :src="member_info.head_pic" style="margin:15px;float: right" />-->
-                    <a-avatar src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" style="margin:15px;float: right" />
+                    <a-avatar :src="member_info.head_pic" style="margin:15px;float: right" />
                 </span>
     </a-layout-header>
 </template>
