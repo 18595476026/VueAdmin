@@ -114,3 +114,15 @@ export const handleChange = info => {
         this.$message.error("上传失败", 2);
     }
 };
+
+/**
+ * 获取图片上传配置参数
+ * @returns {{key: string, token: string}}
+ * @constructor
+ */
+export function GetToken() {
+    return {
+        token:"2GT8_ebgVYJqZLXGZYLWaAhM_yeAjJbC4FEG1YxF:mh0_jRb8jH61hOQk6vipPI5glVw=:eyJzY29wZSI6InhpbmdiYW5ncGFpa2UiLCJkZWFkbGluZSI6MTU3NTM0MzAxNH0=",
+        key:'c5AyaRdzsUcr-1hFd26E8TCcVYEtiw8m-EefFQjW',
+    }
+}

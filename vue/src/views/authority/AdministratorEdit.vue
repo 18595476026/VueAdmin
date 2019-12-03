@@ -22,8 +22,9 @@
                     listType="picture-card"
                     class="avatar-uploader"
                     :showUploadList="false"
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    action="http://pkqiniu.51xingbang.com"
                     :beforeUpload="beforeUpload"
+                    data="upload_data"
                     @change="handleChange"
                     v-decorator="['head_pic']"
             >
@@ -78,7 +79,7 @@
 </template>
 <script>
     import {EditAdministrator, SaveAdministrator} from "../../axios/api";
-    import {handleChange,beforeUpload} from "../../assets/common";
+    import {handleChange,beforeUpload,GetToken} from "../../assets/common";
     import moment from "moment";
 
     export default {
@@ -101,6 +102,7 @@
                     sm: {span: 12},
                 },
                 moment,
+                upload_data:GetToken(),
             };
         },
         created() {
@@ -155,7 +157,7 @@
             },
             dateChange(date, dateString) {
                 this.birthday = dateString;
-            }
+            },
         }
     };
 </script>
