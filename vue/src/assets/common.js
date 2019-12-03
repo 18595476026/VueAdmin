@@ -68,3 +68,49 @@ export function isPhone (s) {
 export function isURL (s) {
     return /^http[s]?:\/\/.*/.test(s)
 }
+
+
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img)
+}
+
+/**
+ * 上传图片之前对图片格式/大小进行判断
+ * @param file
+ * @returns {*|boolean}
+ */
+export const  beforeUpload = file => {
+    const file_type = ['image/jpeg','image/jpg','image/png'];
+    const isJPG = file.type;
+    const is_exist = file_type.indexOf(isJPG);
+    if (is_exist == -1) {
+        this.$message.error('You can only upload JPG file!')
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        this.$message.error('Image must smaller than 2MB!')
+    }
+    return isJPG && isLt2M
+};
+
+/**
+ * 上传文件改变时的状态
+ * @param info
+ */
+export const handleChange = info => {
+    if (info.file.status === 'uploading') {
+        this.loading = true;
+        return
+    }
+    if (info.file.status === 'done') {
+        this.head_pic = info.file.response.thumbUrl;
+        getBase64(info.file.originFileObj, (imageUrl) => {
+            this.imageUrl = imageUrl;
+            this.loading = false;
+        })
+    } else if (info.file.status === 'error') {
+        this.$message.error("上传失败", 2);
+    }
+};

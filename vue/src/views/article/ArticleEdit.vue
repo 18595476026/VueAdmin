@@ -67,12 +67,8 @@
 </template>
 <script>
     import {EditArticle,SaveArticle} from "../../axios/api";
+    import {handleChange,beforeUpload} from "../../assets/common";
     import TinyMce from '../../components/Tinymce';
-    function getBase64 (img, callback) {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => callback(reader.result));
-        reader.readAsDataURL(img)
-    }
 
     export default {
         name: "MenuEdit",
@@ -159,31 +155,10 @@
                 })
             },
             handleChange (info) {
-                if (info.file.status === 'uploading') {
-                    this.loading = true;
-                    return
-                }
-                if (info.file.status === 'done') {
-                    this.article_pic = info.file.response.thumbUrl;
-                    // Get this url from response in real world.
-                    getBase64(info.file.originFileObj, (imageUrl) => {
-                        this.imageUrl = imageUrl;
-                        this.loading = false;
-                    })
-                }else if(info.file.status === 'error'){
-                    this.$message.error("上传失败",2);
-                }
+                handleChange(info);
             },
             beforeUpload (file) {
-                const isJPG = file.type === 'image/jpeg'
-                if (!isJPG) {
-                    this.$message.error('You can only upload JPG file!')
-                }
-                const isLt2M = file.size / 1024 / 1024 < 2
-                if (!isLt2M) {
-                    this.$message.error('Image must smaller than 2MB!')
-                }
-                return isJPG && isLt2M
+                beforeUpload(file);
             },
         }
     };
